@@ -172,8 +172,7 @@ Pair * upperBound(TreeMap * tree, void* key) {
             // Se encontró una clave igual a key, se retorna el par asociado
             return current->pair;
         } else if (tree->lower_than(current->pair->key, key)) {
-            // Clave del nodo actual es menor que key, se actualiza ub_node
-            ub_node = current;
+            // Clave del nodo actual es menor que key, se avanza hacia la derecha
             current = current->right;
         } else {
             // Clave del nodo actual es mayor o igual que key, se actualiza ub_node
