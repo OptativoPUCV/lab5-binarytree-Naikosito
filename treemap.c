@@ -124,9 +124,10 @@ void removeNode(TreeMap * tree, TreeNode* node) {
     }
 // Caso 2 Hijos
     else {
-        TreeNode* min = minimum(node->right);
-        node->pair = min->pair;
-        removeNode(tree, min);
+        TreeNode * successor = minimum(node->right); 
+        node->pair->key = successor->pair->key; // Copiar la clave del sucesor al nodo actual
+        node->pair->value = successor->pair->value; // Copiar el valor del sucesor al nodo actual
+        removeNode(tree, successor); // Eliminar el sucesor recursivamente
     }
         
     
