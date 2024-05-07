@@ -83,9 +83,9 @@ Pair * searchTreeMap(TreeMap * tree, void* key) {
         return NULL; // El mapa está vacío
     }
 
-    TreeNode * current = tree->current;
+    TreeNode * current = tree->root;
     while (current) {
-        int cmp = tree->lower_than(key, current->pair->key);
+        int cmp = tree->lower_than(current->pair->key, key);
         if (cmp < 0) {
             current = current->left;
         } else if (cmp > 0) {
