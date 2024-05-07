@@ -191,7 +191,18 @@ Pair * upperBound(TreeMap * tree, void* key) {
 }
 
 Pair * firstTreeMap(TreeMap * tree) {
-    return NULL;
+    // Encontrar el nodo con la clave mínima (el primer par del mapa)
+    TreeNode * current = tree->root;
+    while (current != NULL && current->left != NULL) {
+        current = current->left;
+    }
+
+    if (current != NULL) {
+        tree->current = current; // Actualizar el puntero current del árbol
+        return current->pair;
+    }
+
+    return NULL; // El árbol está vacío
 }
 
 Pair * nextTreeMap(TreeMap * tree) {
