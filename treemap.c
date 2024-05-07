@@ -83,16 +83,21 @@ Pair * searchTreeMap(TreeMap * tree, void* key) {
     TreeNode * current = tree->root;
 
     // Recorrer el árbol hasta encontrar el nodo con la clave
-    while (current != NULL) {
-        int cmp = tree->lower_than(key, current->pair->key);
-        if (cmp < 0) {
-            current = current->left;
-        } else if (cmp > 0) {
-            current = current->right;
-        } else {
-            // Clave encontrada, actualizar current y retornar el Pair
-            tree->current = current;
-            return current->pair;
+    while (tree->current != NULL) {
+        // Compara la clave del nodo actual con la clave buscada
+        int comparison_result = tree->lower_than(key, tree->current->pair->key);
+        
+        // Si las claves son iguales, se encontró el nodo
+        if (comparison_result == 0) {
+            return tree->current->pair;
+        }
+        // Si la clave buscada es menor, busca en el subárbol izquierdo
+        else if (comparison_result < 0) {
+            tree->current = tree->current->left;
+        }
+        // Si la clave buscada es mayor, busca en el subárbol derecho
+        else {
+            tree->current = tree->current->right;
         }
     }
 
