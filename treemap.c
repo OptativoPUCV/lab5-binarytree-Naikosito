@@ -142,9 +142,6 @@ void eraseTreeMap(TreeMap * tree, void* key){
 
 }
 
-
-
-
 Pair * searchTreeMap(TreeMap * tree, void* key) {
     TreeNode * current = tree->root;
 
@@ -203,5 +200,32 @@ Pair * firstTreeMap(TreeMap * tree) {
 }
 
 Pair * nextTreeMap(TreeMap * tree) {
-    return NULL;
+    if (tree == NULL || tree->current == NULL) {
+        return NULL; // No se puede avanzar si el árbol está vacío o current es NULL
+    }
+
+    TreeNode * current = tree->current;
+
+    // Caso 1: Si el nodo tiene un hijo derecho, el siguiente nodo es el mínimo del subárbol derecho
+    if (current->right != NULL) {
+        current = minimum(current->right);
+    } else {
+        // Caso 2: Si el nodo no tiene hijo derecho, subir por el árbol hasta encontrar un padre cuyo hijo izquierdo sea el nodo actual
+        TreeNode * parent = current->parent;
+        while (parent != NULL && current == parent->right) {
+            current = parent;
+            parent = parent->parent;
+        }
+        current = parent;
+    }
+
+    // Actualizar el puntero current del árbol
+    tree->current = current;
+
+    // Retornar el par asociado al nodo encontrado
+    if (current != NULL) {
+        return current->pair;
+    } else {
+        return NULL; // Llegamos al final del árbol
+    }
 }
