@@ -95,6 +95,7 @@ TreeNode * minimum(TreeNode * x){
 
 
 void removeNode(TreeMap * tree, TreeNode* node) {
+// Caso sin Hijos
     if (node->left == NULL && node->right == NULL) {
         if (node == node->parent->left) {
             // El nodo es un hijo izquierdo
@@ -106,6 +107,22 @@ void removeNode(TreeMap * tree, TreeNode* node) {
         free(node->pair); // Liberar memoria del par
         free(node); // Liberar memoria del nodo
     }
+// Caso 1 Hijo
+    else if (node->left == NULL || node->right == NULL)
+    {
+        TreeNode * child = (node->left != NULL) ? node->left : node->right;
+        if (node == node->parent->left) 
+            // El nodo es un hijo izquierdo
+            node->parent->left = child;
+        else 
+            // El nodo es un hijo derecho
+            node->parent->right = child;
+        
+        child->parent = node->parent;
+        free(node->pair); // Liberar memoria del par
+        free(node); // Liberar memoria del nodo
+    }
+        
     
 
 }
