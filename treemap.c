@@ -209,8 +209,10 @@ Pair * nextTreeMap(TreeMap * tree) {
     // Caso 1: Si el nodo tiene un hijo derecho, el siguiente nodo es el mínimo del subárbol derecho
     if (current->right != NULL) {
         current = minimum(current->right);
-    } else {
-        // Caso 2: Si el nodo no tiene hijo derecho, subir por el árbol hasta encontrar un padre cuyo hijo izquierdo sea el nodo actual
+    } 
+    else 
+    {
+    // Caso 2: Si el nodo no tiene hijo derecho, subir por el árbol hasta encontrar un padre cuyo hijo izquierdo sea el nodo actual
         TreeNode * parent = current->parent;
         while (parent != NULL && current == parent->right) {
             current = parent;
