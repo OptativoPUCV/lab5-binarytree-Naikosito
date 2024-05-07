@@ -122,6 +122,12 @@ void removeNode(TreeMap * tree, TreeNode* node) {
         free(node->pair); // Liberar memoria del par
         free(node); // Liberar memoria del nodo
     }
+// Caso 2 Hijos
+    else {
+        TreeNode* min = minimum(node->right);
+        node->pair = min->pair;
+        removeNode(tree, min);
+    }
         
     
 
