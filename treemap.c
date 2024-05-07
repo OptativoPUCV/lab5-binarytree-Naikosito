@@ -173,6 +173,7 @@ Pair * upperBound(TreeMap * tree, void* key) {
             return current->pair;
         } else if (tree->lower_than(current->pair->key, key)) {
             // Clave del nodo actual es menor que key, se actualiza ub_node
+            ub_node = current;
             current = current->right;
         } else {
             // Clave del nodo actual es mayor o igual que key, se actualiza ub_node
