@@ -59,6 +59,12 @@ void insertTreeMap(TreeMap * tree, void* key, void * value) {
     TreeNode * parent = NULL;
 
     while (current != NULL) {
+        if (is_equal(tree, current->pair->key, key)) 
+        {
+            free(newNode->pair); // Liberar memoria del par del nuevo nodo
+            free(newNode); // Liberar memoria del nuevo nodo
+            return; // La clave ya existe, no se puede insertar duplicados
+        }
         parent = current;
 
         if (tree->lower_than(newNode->pair->key, current->pair->key)) {
