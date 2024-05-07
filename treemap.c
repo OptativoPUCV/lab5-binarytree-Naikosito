@@ -131,9 +131,6 @@ void removeNode(TreeMap * tree, TreeNode* node) {
         node->pair->value = successor->pair->value;
         removeNode(tree, successor); // Eliminar el sucesor recursivamente
     }
-        
-    
-
 }
 
 void eraseTreeMap(TreeMap * tree, void* key){
@@ -167,6 +164,29 @@ Pair * searchTreeMap(TreeMap * tree, void* key) {
 
 
 Pair * upperBound(TreeMap * tree, void* key) {
+    TreeNode * current = tree->root;
+    TreeNode * ub_node = NULL;
+
+    while (current != NULL) {
+        if (is_equal(tree, current->pair->key, key)) {
+            // Se encontró una clave igual a key, se retorna el par asociado
+            return current->pair;
+        } else if (tree->lower_than(current->pair->key, key)) {
+            // Clave del nodo actual es menor que key, se actualiza ub_node
+            current = current->right;
+        } else {
+            // Clave del nodo actual es mayor o igual que key, se actualiza ub_node
+            ub_node = current;
+            current = current->left;
+        }
+    }
+
+    // Si no se encontró una clave igual a key, se retorna el par asociado al ub_node encontrado
+    if (ub_node != NULL) {
+        return ub_node->pair;
+    }
+
+    // Si no se encontró ninguna clave mayor o igual a key, se retorna NULL
     return NULL;
 }
 
